@@ -1,0 +1,64 @@
+import sys
+
+books = {}
+
+while True:
+    # Menu design
+    print("\n" + "="*25)
+    print("    BEST LIBRARY SYSTEM")
+    print("="*25)
+    try:
+        choices = int(input("\n1. Add a Book\n2. Review Book List\n3. Exit the Program\n\nYour choice: "))
+    except ValueError:
+        print("\nInvalid input. Please enter a number.")
+        continue
+
+    # Add a book
+    if choices == 1:
+        print("\n" + "-"*25)
+        print("    ADD YOUR BOOK")
+        print("-"*25)
+
+        while True:
+            book = input("\nName of the Book: ").strip()
+            if book:
+                break
+            print("Book name cannot be empty. Please try again.")
+
+        while True:
+            author = input("Name of Author: ").strip()
+            if author:
+                break
+            print("Author name cannot be empty. Please try again.")
+
+        books[book] = {"author": author}
+        print(f"\nBook '{book}' by {author} added successfully!")
+
+    # Review book list
+    elif choices == 2:
+        print("\n" + "-"*25)
+        print("    REVIEW BOOK LIST")
+        print("-"*25)
+
+        if books:
+            search = input("\nEnter name of the Book (or press enter to display all): ")
+            if search:
+                if search in books:
+                    print(f"\n{search} by {books[search]['author']}")
+                else:
+                    print("\nBook not found.")
+            else:
+                print("\nAll books:")
+                for title, info in books.items():
+                    print(f"{title} by {info['author']}")
+        else:
+            print("\nNo books available.")
+
+    # Exit the program
+    elif choices == 3:
+        print("\nThank you for using our Awesome Library System!\n")
+        sys.exit()
+
+    # Invalid choice
+    else:
+        print("\nInvalid choice. Please enter 1, 2, or 3.")
